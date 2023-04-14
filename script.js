@@ -39,11 +39,12 @@ function exibeMensagem() {
     .then(response => {
       const mensagens = response.data
       console.log(mensagens)
+      main.innerHTML = '' // limpa o conteúdo anterior antes de renderizar as mensagens
       mensagens.forEach(mensagem => {
         main.innerHTML += `
         <div class="bloco-msg gray">
           <div class="horario">(${mensagem.time})</div>
-          <div class="nome"><span>${mensagem.from}</span> Entra na sala...</div>
+          <div class="nome"><span>${mensagem.from}</span></div>
           <div class="mensagem">${mensagem.text}</div> 
         </div>`
       })
@@ -67,15 +68,16 @@ function enviaMensagem() {
 
   axios
     .post('https://mock-api.driven.com.br/api/vm/uol/messages', userMsg)
-    .then(response => console.log(response.data))
+    .then(response => {
+      console.log(response.data)
+      exibeMensagem() // atualiza a lista de mensagens na tela após enviar a mensagem com sucesso
+    })
     .catch(() => {
       console.log('algo deu errado ao enviar a mensagem.......')
     })
 }
 
 setInterval(verificaSeContinuaOnline, 5000)
-setInterval(exibeMensagem, 5000)
 
 postaNome()
-
-// exibeMensagem()
+exibeMensagem()
