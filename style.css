@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+}
+
+.container {
+  width: 375px;
+  margin: 0 auto;
+}
+
+/* HEADER ================================== */
+header {
+  background-color: #fff;
+  width: 375px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px;
+  position: fixed;
+  top: 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+ion-icon.people-sharp {
+  width: 40px;
+  height: 40px;
+}
+
+/* HEADER ================================== */
+
+/* MAIN ================================== */
+
+main {
+  margin-top: 102px;
+  margin-bottom: 82px;
+  width: 100%;
+}
+
+.bloco-msg {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.bloco-msg .horario {
+  color: #aaaaaa;
+}
+
+.bloco-msg span {
+  font-weight: 700;
+}
+
+.gray {
+  width: 100%;
+  background-color: #dcdcdc;
+}
+
+.red {
+  width: 100%;
+  background-color: #ffdede;
+}
+/* MAIN ================================== */
+
+/* FOOTER ================================== */
+
+footer {
+  background-color: #fff;
+  margin-top: 240px;
+  width: 375px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  bottom: 0;
+}
+
+footer input {
+  border: none;
+  outline: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+
+  color: #000000;
+}
+
+footer input::placeholder {
+  color: #000;
+  font-weight: bold;
+  font-style: italic;
+}
+
+ion-icon.paper-plane-outline {
+  width: 26px;
+  height: 26px;
+}
+
+/* FOOTER ================================== */
