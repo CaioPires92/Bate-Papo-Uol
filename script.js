@@ -1,43 +1,35 @@
 const token = 'DfkfIQzHb6JVy20oJwTomzYY'
+const mock = 'https://mock-api.driven.com.br/api/vm/uol/'
+
 axios.defaults.headers.common['Authorization'] = token
 
 let nome = prompt('Qual é o seu nome?')
 
 function postaNome() {
-  const promise = axios.post(
-    'https://mock-api.driven.com.br/api/vm/uol/participants ',
-    {
+  axios
+    .post('https://mock-api.driven.com.br/api/vm/uol/participants', {
       name: nome
-    }
-  )
-
-  promise
+    })
     .then(response => console.log(response.data))
     .catch(error => {
-      console.log('Nome já está em uso ou ocorreu um erro ao postar o nome.'),
-        solicitaNovoNome()
+      console.log('Nome já está em uso ou ocorreu um erro ao postar o nome.')
+      solicitaNovoNome()
     })
 }
 
 function solicitaNovoNome() {
   let novoNome = prompt('Este nome já está em uso, digite outro Nome: ')
   nome = novoNome
-  window.location.reload()
+  postaNome()
 }
 
 function verificaSeContinuaOnline() {
-  const promise = axios.post(
-    'https://mock-api.driven.com.br/api/vm/uol/status',
-    {
+  axios
+    .post('https://mock-api.driven.com.br/api/vm/uol/status', {
       name: nome
-    }
-  )
-
-  promise
+    })
     .then(response => console.log(response.data))
-    .catch(() =>
-      console.log('algum erro ao verificar se esta online ...........')
-    )
+    .catch(() => console.log('Algum erro ao verificar se esta online.'))
 }
 
 function buscaMensagem() {
@@ -51,11 +43,10 @@ function exibeMensagem() {
       const mensagens = response.data
       console.log(mensagens)
       main.innerHTML = ''
-      const mensagensRecentes = mensagens.slice(-10)
+      const mensagensRecentes = mensagens.slice(-100)
 
       mensagensRecentes.forEach(mensagem => {
         main.innerHTML += `
-        
         <div class="bloco-msg" data-test="message">
           <div class="horario" data-test="message">(${mensagem.time})</div>
           <div class="nome" data-test="message"><span>${mensagem.from}</span></div>
@@ -63,14 +54,11 @@ function exibeMensagem() {
         </div>`
       })
     })
-    .catch(() => {
-      console.log('algum erro na busca da mensagem.............')
-    })
+    .catch(() => console.log('Algum erro na busca da mensagem.'))
 }
 
 function enviaMensagem() {
   let mensagemDigitada = document.querySelector('input').value
-
   console.log(mensagemDigitada)
 
   let userMsg = {
@@ -82,12 +70,9 @@ function enviaMensagem() {
 
   axios
     .post('https://mock-api.driven.com.br/api/vm/uol/messages', userMsg)
-    .then(response => {
-      console.log(response.data)
-      exibeMensagem()
-    })
+    .then(response => console.log(response.data))
     .catch(() => {
-      console.log('algo deu errado ao enviar a mensagem.......')
+      console.log('Algo deu errado ao enviar a mensagem.')
       window.location.reload()
     })
 
@@ -95,5 +80,6 @@ function enviaMensagem() {
 }
 
 postaNome()
+exibeMensagem()
 setInterval(verificaSeContinuaOnline, 5000)
 setInterval(exibeMensagem, 3000)
