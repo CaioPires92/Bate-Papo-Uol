@@ -1,7 +1,7 @@
 const token = 'DfkfIQzHb6JVy20oJwTomzYY'
 axios.defaults.headers.common['Authorization'] = token
 
-const nome = prompt('Qual é o seu nome?')
+let nome = prompt('Qual é o seu nome?')
 
 function postaNome() {
   const promise = axios.post(
@@ -11,8 +11,18 @@ function postaNome() {
     }
   )
 
-  promise.then(promise => console.log(promise.data))
-  promise.catch(() => console.log('algum erro ao postar nome ...........'))
+  promise
+    .then(response => console.log(response.data))
+    .catch(error => {
+      console.log('Nome já está em uso ou ocorreu um erro ao postar o nome.'),
+        solicitaNovoNome()
+    })
+}
+
+function solicitaNovoNome() {
+  let novoNome = prompt('Este nome já está em uso, digite outro Nome: ')
+  nome = novoNome
+  window.location.reload()
 }
 
 function verificaSeContinuaOnline() {
@@ -42,7 +52,7 @@ function exibeMensagem() {
       main.innerHTML = '' // limpa o conteúdo anterior antes de renderizar as mensagens
       mensagens.forEach(mensagem => {
         main.innerHTML += `
-        <div class="bloco-msg gray">
+        <div class="bloco-msg">
           <div class="horario">(${mensagem.time})</div>
           <div class="nome"><span>${mensagem.from}</span></div>
           <div class="mensagem">${mensagem.text}</div> 
@@ -70,14 +80,17 @@ function enviaMensagem() {
     .post('https://mock-api.driven.com.br/api/vm/uol/messages', userMsg)
     .then(response => {
       console.log(response.data)
-      exibeMensagem() // atualiza a lista de mensagens na tela após enviar a mensagem com sucesso
+      exibeMensagem()
     })
     .catch(() => {
       console.log('algo deu errado ao enviar a mensagem.......')
+      window.location.reload()
     })
 }
 
 setInterval(verificaSeContinuaOnline, 5000)
 
 postaNome()
+
 exibeMensagem()
+setInterval(exibeMensagem, 3000)
