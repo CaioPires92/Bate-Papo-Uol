@@ -49,8 +49,10 @@ function exibeMensagem() {
     .then(response => {
       const mensagens = response.data
       console.log(mensagens)
-      main.innerHTML = '' // limpa o conteúdo anterior antes de renderizar as mensagens
-      mensagens.forEach(mensagem => {
+      main.innerHTML = ''
+      const mensagensRecentes = mensagens.slice(-100)
+
+      mensagensRecentes.forEach.forEach(mensagem => {
         main.innerHTML += `
         <div class="bloco-msg" data-test="message">
           <div class="horario" data-test="message">(${mensagem.time})</div>
