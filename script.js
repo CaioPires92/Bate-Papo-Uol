@@ -26,15 +26,16 @@ function solicitaNovoNome() {
 }
 
 function verificaSeContinuaOnline() {
-  const promise2 = axios.post(
+  const promise = axios.post(
     'https://mock-api.driven.com.br/api/vm/uol/status',
     {
       name: nome
     }
   )
 
-  promise2.then(promise2 => console.log(promise2.data)),
-    promise2.catch(() =>
+  promise
+    .then(response => console.log(response.data))
+    .catch(() =>
       console.log('algum erro ao verificar se esta online ...........')
     )
 }
