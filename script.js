@@ -52,7 +52,7 @@ function exibeMensagem() {
       main.innerHTML = '' // limpa o conteúdo anterior antes de renderizar as mensagens
       mensagens.forEach(mensagem => {
         main.innerHTML += `
-        <div class="bloco-msg">
+        <div class="bloco-msg" data-test="message">
           <div class="horario">(${mensagem.time})</div>
           <div class="nome"><span>${mensagem.from}</span></div>
           <div class="mensagem">${mensagem.text}</div> 

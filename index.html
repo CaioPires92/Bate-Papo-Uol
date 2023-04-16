@@ -29,12 +29,17 @@
         </div> -->
       </main>
       <footer>
-        <input type="text" placeholder="Escreva Aqui..." />
+        <input
+          type="text"
+          placeholder="Escreva Aqui..."
+          data-test="input-message"
+        />
         <div class="icone">
           <ion-icon
-            onclick="enviaMensagem()"
+            onclick="enviaMensagem() "
             class="paper-plane-outline"
             name="paper-plane-outline"
+            data-test="send-message"
           ></ion-icon>
         </div>
       </footer>
