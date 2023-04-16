@@ -86,6 +86,8 @@ function enviaMensagem() {
       console.log('algo deu errado ao enviar a mensagem.......')
       window.location.reload()
     })
+
+  document.querySelector('input').value = ''
 }
 
 setInterval(verificaSeContinuaOnline, 5000)
