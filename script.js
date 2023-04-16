@@ -50,10 +50,11 @@ function exibeMensagem() {
       const mensagens = response.data
       console.log(mensagens)
       main.innerHTML = ''
-      const mensagensRecentes = mensagens.slice(-100)
+      const mensagensRecentes = mensagens.slice(-10)
 
-      mensagensRecentes.forEach.forEach(mensagem => {
+      mensagensRecentes.forEach(mensagem => {
         main.innerHTML += `
+        
         <div class="bloco-msg" data-test="message">
           <div class="horario" data-test="message">(${mensagem.time})</div>
           <div class="nome" data-test="message"><span>${mensagem.from}</span></div>
