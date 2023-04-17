@@ -4,6 +4,7 @@ const mock = 'https://mock-api.driven.com.br/api/vm/uol/'
 axios.defaults.headers.common['Authorization'] = token
 
 let nome = prompt('Qual é o seu nome?')
+let ativo = true
 
 function postaNome() {
   axios
@@ -38,23 +39,25 @@ function buscaMensagem() {
 
 function exibeMensagem() {
   const main = document.querySelector('main')
-  buscaMensagem()
-    .then(response => {
-      const mensagens = response.data
-      console.log(mensagens)
-      main.innerHTML = ''
-      const mensagensRecentes = mensagens.slice(-100)
+  if (ativo) {
+    buscaMensagem()
+      .then(response => {
+        const mensagens = response.data
+        console.log(mensagens)
+        main.innerHTML = ''
+        const mensagensRecentes = mensagens.slice(-100)
 
-      mensagensRecentes.forEach(mensagem => {
-        main.innerHTML += `
-        <div class="bloco-msg" data-test="message">
-          <div class="horario" data-test="message">(${mensagem.time})</div>
-          <div class="nome" data-test="message"><span>${mensagem.from}</span></div>
-          <div class="mensagem" data-test="message">${mensagem.text}</div>
-        </div>`
+        mensagensRecentes.forEach(mensagem => {
+          main.innerHTML += `
+          <div class="bloco-msg" data-test="message">
+            <div class="horario" data-test="message">(${mensagem.time})</div>
+            <div class="nome" data-test="message"><span>${mensagem.from}</span></div>
+            <div class="mensagem" data-test="message">${mensagem.text}</div>
+          </div>`
+        })
       })
-    })
-    .catch(() => console.log('Algum erro na busca da mensagem.'))
+      .catch(() => console.log('Algum erro na busca da mensagem.'))
+  }
 }
 
 function enviaMensagem() {
