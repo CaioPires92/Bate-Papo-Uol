@@ -82,6 +82,15 @@ function enviaMensagem() {
   document.querySelector('input').value = ''
 }
 
+const mensagemInput = document.querySelector('.inputText')
+console.log('asasasasa' + mensagemInput)
+
+mensagemInput.addEventListener('keyup', event => {
+  if (event.keyCode === 13) {
+    enviaMensagem()
+  }
+})
+
 postaNome()
 exibeMensagem()
 setInterval(verificaSeContinuaOnline, 5000)
